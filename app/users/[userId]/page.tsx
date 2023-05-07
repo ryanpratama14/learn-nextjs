@@ -16,7 +16,7 @@ const UserPage = async ({ params: { userId } }: Params) => {
     <section className="flex flex-col gap-8 p-normal">
       <div className="flex flex-col gap-4">
         <h4>This is {user?.name}</h4>
-        <Link className="btn-red" href="/users">
+        <Link className="btn btn-red" href="/users">
           Back to Users
         </Link>
       </div>

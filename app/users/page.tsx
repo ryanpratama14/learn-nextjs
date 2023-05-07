@@ -12,7 +12,7 @@ const UsersPage = async () => {
     <section className="gap-8 flex flex-col p-normal">
       <div className="flex flex-col justify-center items-center gap-4">
         <h2 className="text-primary">Users List</h2>
-        <Link href="/" className="btn-primary">
+        <Link href="/" className="btn btn-primary">
           Back to Main Page
         </Link>
       </div>
@@ -29,7 +29,7 @@ const UsersPage = async () => {
                 <p>{e?.email}</p>
               </div>
               <div className="flex justify-end">
-                <Link className="btn-red" href={`/users/${e?.id}`}>
+                <Link className="btn btn-red" href={`/users/${e?.id}`}>
                   More information
                 </Link>
               </div>

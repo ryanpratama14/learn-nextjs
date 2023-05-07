@@ -37,19 +37,19 @@
     @apply py-2 px-6 active:scale-95 transition-all outline-none rounded-md w-fit;
   }
   .btn-primary {
-    @apply text-white bg-primary hover:bg-primaryDarker btn;
+    @apply text-white bg-primary hover:bg-primaryDarker;
   }
   .btn-secondary {
-    @apply text-black bg-secondary hover:bg-secondaryDarker btn;
+    @apply text-black bg-secondary hover:bg-secondaryDarker;
   }
   .btn-red {
-    @apply text-white bg-red hover:bg-redDarker btn;
+    @apply text-white bg-red hover:bg-redDarker;
   }
   .btn-wintergreen {
-    @apply text-white bg-wintergreen hover:bg-wintergreenDarker btn;
+    @apply text-white bg-wintergreen hover:bg-wintergreenDarker;
   }
   .btn-junglegreen {
-    @apply text-white bg-junglegreen hover:bg-junglegreenDarker btn;
+    @apply text-white bg-junglegreen hover:bg-junglegreenDarker;
   }
   .h1 {
     @apply text-4xl md:text-5xl lg:text-6xl font-bold;

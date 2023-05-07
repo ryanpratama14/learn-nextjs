@@ -1,18 +1,59 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      colors: {
+        primary: "#1D7874",
+        primaryDarker: "#155956",
+        secondary: "#F4C095",
+        secondaryDarker: "#c99e7b",
+        red: "#EE2E31",
+        redDarker: "#cc272a",
+        wintergreen: "#679289",
+        wintergreenDarker: "#507069",
+        junglegreen: "#071E22",
+        junglegreenDarker: "#041012",
+      },
+      padding: {
+        shorter4: "1vw",
+        shorter3: "2vw",
+        shorter2: "3vw",
+        shorter: "4vw",
+        normal: "6vw",
+        longer: "8vw",
+        longer2: "10vw",
+        longer3: "12vw",
+        longer4: "14vw",
+        longer5: "16vw",
+        longer6: "18vw",
+        longer7: "20vw",
+        longer8: "22vw",
+        longer9: "24vw",
+        longer10: "26vw",
+      },
+      margin: {
+        shorter4: "1vw",
+        shorter3: "2vw",
+        shorter2: "3vw",
+        shorter: "4vw",
+        normal: "6vw",
+        longer: "8vw",
+        longer2: "10vw",
+        longer3: "12vw",
+        longer4: "14vw",
+        longer5: "16vw",
+        longer6: "18vw",
+        longer7: "20vw",
+        longer8: "22vw",
+        longer9: "24vw",
+        longer10: "26vw",
       },
     },
   },
   plugins: [],
-}
+};

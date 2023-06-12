@@ -1,4 +1,5 @@
-const api = process.env.API;
+export const api = process.env.API;
+export const publicApi = process.env.NEXT_PUBLIC_API;
 
 export async function getAllUsers() {
   const res = await fetch(`${api}/users`);
@@ -8,12 +9,38 @@ export async function getAllUsers() {
 
 export async function getUser(userId: string) {
   const res = await fetch(`${api}/users/${userId}`);
-  if (!res?.ok) throw new Error("Failed to fetch user data");
+  if (!res?.ok) undefined;
   return res?.json();
 }
 
 export async function getUserPost(userId: string) {
-  const res = await fetch(`${api}/posts?userId=${userId}`);
+  const res = await fetch(`${api}/posts?userId=${userId}`, {
+    next: { revalidate: 60 },
+  });
   if (!res?.ok) throw new Error("Failed to fetch user's post");
+  return res?.json();
+}
+
+export async function createPost(postData: object) {
+  const res = await fetch(`${publicApi}/posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  });
+  if (!res?.ok) throw new Error("Failed to create post");
+  return res?.json();
+}
+
+export async function putPost(postData: object, userId: string) {
+  const res = await fetch(`${api}/posts/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+    body: JSON.stringify(postData),
+  });
+  if (!res?.ok) throw new Error("Failed to create post");
   return res?.json();
 }

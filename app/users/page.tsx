@@ -1,7 +1,9 @@
 import { getAllUsers } from "@/lib/users/route";
 import Link from "next/link";
+import AddPost from "./components/AddPost";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Users",
 };
 
@@ -37,6 +39,7 @@ const UsersPage = async () => {
           );
         })}
       </div>
+      <AddPost />
     </section>
   );
 };

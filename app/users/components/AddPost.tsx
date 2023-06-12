@@ -45,6 +45,7 @@ export default function AddPost() {
         name="title"
         placeholder="Title"
         type="text"
+        required
       />
       <input
         value={data.body}
@@ -52,6 +53,7 @@ export default function AddPost() {
         name="body"
         placeholder="Body"
         type="text"
+        required
       />
       <input
         value={data.email}
@@ -59,6 +61,7 @@ export default function AddPost() {
         name="email"
         placeholder="Email"
         type="email"
+        required
       />
       <textarea
         rows={5}
@@ -66,6 +69,7 @@ export default function AddPost() {
         onChange={handleChange}
         name="desc"
         placeholder="Desc"
+        required
       />
       <section className="flex gap-2 items-center">
         <button

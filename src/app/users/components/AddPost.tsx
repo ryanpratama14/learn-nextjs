@@ -37,7 +37,7 @@ export default function AddPost() {
     <section className="flex flex-col items-center justify-center gap-12">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 items-center justify-center w-[30%]"
+        className="flex flex-col gap-4 items-center justify-center w-full md:w-[50%] xl:w-[30%]"
       >
         <input
           value={data.title}

@@ -2,10 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.iOS {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 @layer base {
   input,
   textarea {
-    @apply p-2 rounded-md border-2 border-primary outline-none w-[30%];
+    @apply p-2 rounded-md border-2 border-primary outline-none w-full;
   }
 
   button {

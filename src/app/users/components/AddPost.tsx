@@ -8,88 +8,112 @@ const initialValue: PostItems = {
   body: "",
   email: "",
   desc: "",
+  date: "",
   userId: 1,
-  agree: false,
+  applied: false,
 };
 
 export default function AddPost() {
   const [data, setData] = useState(initialValue);
+  const [newData, setNewData] = useState<PostItems>();
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, type, value, checked } = e.target;
+    setData({ ...data, [name]: type === "checkbox" ? checked : value });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (data.agree) {
-      try {
-        const res = await createPost(data);
-        console.log(res);
-        setData(initialValue);
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      const res = await createPost(data);
+      setNewData(res);
+      setData(initialValue);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 items-center justify-center w-full"
-    >
-      <input
-        value={data.title}
-        onChange={handleChange}
-        name="title"
-        placeholder="Title"
-        type="text"
-        required
-      />
-      <input
-        value={data.body}
-        onChange={handleChange}
-        name="body"
-        placeholder="Body"
-        type="text"
-        required
-      />
-      <input
-        value={data.email}
-        onChange={handleChange}
-        name="email"
-        placeholder="Email"
-        type="email"
-        required
-      />
-      <textarea
-        rows={5}
-        value={data.desc}
-        onChange={handleChange}
-        name="desc"
-        placeholder="Desc"
-        required
-      />
-      <section className="flex gap-2 items-center">
-        <button
-          type="button"
-          className="p-0 text-primary border-2 border-primary"
-          onClick={() => setData({ ...data, agree: !data.agree })}
-        >
-          <Icon
-            width={25}
-            icon="mdi:check-bold"
-            className={`animate ${
-              data.agree ? "scale-100" : "translate-y-2 scale-0"
-            }`}
-          />
+    <section className="flex flex-col items-center justify-center gap-12">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 items-center justify-center w-[30%]"
+      >
+        <input
+          value={data.title}
+          onChange={handleChange}
+          placeholder="Title"
+          name="title"
+          type="text"
+          required
+        />
+        <input
+          value={data.body}
+          onChange={handleChange}
+          placeholder="Body"
+          name="body"
+          type="text"
+          required
+        />
+        <input
+          value={data.email}
+          onChange={handleChange}
+          placeholder="Email"
+          name="email"
+          type="email"
+          required
+        />
+        <input
+          value={data.date}
+          onChange={handleChange}
+          placeholder="Date"
+          name="date"
+          type="date"
+          required
+          className="iOS !text-left"
+        />
+        <textarea
+          value={data.desc}
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+            setData({ ...data, desc: e.target.value })
+          }
+          placeholder="Description"
+          required
+          rows={5}
+        />
+        <section className="flex gap-2 items-center">
+          <div className="relative border-2 border-primary text-primary rounded-md">
+            <input
+              checked={data.applied}
+              onChange={handleChange}
+              name="applied"
+              type="checkbox"
+              className="absolute w-full h-full z-10 opacity-0 cursor-pointer"
+            />
+            <Icon
+              width={20}
+              icon="mdi:check-bold"
+              className={`animate ${
+                data.applied ? "scale-100" : "translate-y-2 scale-0"
+              }`}
+            />
+          </div>
+          <label>Did you applied before?</label>
+        </section>
+        <button type="submit" className="btn-primary">
+          Submit
         </button>
-        <label>I agree on terms</label>
-      </section>
-      <button type="submit" className="btn-red">
-        Submit
-      </button>
-    </form>
+      </form>
+      {newData ? (
+        <section className="flex p-3 flex-col rounded-md border-2 border-primary text-primaryDarker">
+          <h4>New Data Submitted</h4>
+          <p>
+            {newData.title}, {newData.body}, {newData.date},{" "}
+            {newData.applied ? "Applied before" : "Applied for the first time"},{" "}
+            {newData.email}, {newData.desc}
+          </p>
+        </section>
+      ) : null}
+    </section>
   );
 }

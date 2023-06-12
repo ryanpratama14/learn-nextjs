@@ -7,18 +7,20 @@ export const metadata: Metadata = {
   title: "Users",
 };
 
-const UsersPage = async () => {
-  const usersData: Promise<User[]> = getAllUsers();
-  const users = await usersData;
+const UsersPage = async (): Promise<JSX.Element> => {
+  // const usersData: Promise<User[]> = getAllUsers();
+  // const users = await usersData;
+  const users: User[] = await getAllUsers();
+
   return (
-    <section className="gap-8 flex flex-col p-normal">
-      <div className="flex flex-col justify-center items-center gap-4">
+    <article className="gap-8 flex flex-col p-normal">
+      <header className="flex flex-col justify-center items-center gap-4">
         <h2 className="text-primary">Users List</h2>
         <Link href="/" className="btn btn-primary">
           Back to Main Page
         </Link>
-      </div>
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      </header>
+      <section className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {users?.map((e) => {
           return (
             <div
@@ -38,9 +40,9 @@ const UsersPage = async () => {
             </div>
           );
         })}
-      </div>
+      </section>
       <AddPost />
-    </section>
+    </article>
   );
 };
 

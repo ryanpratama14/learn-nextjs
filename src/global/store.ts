@@ -1,15 +1,15 @@
 import { toast } from "react-hot-toast";
 import { create } from "zustand";
 
-export interface State {
+type StateItems = {
   show: boolean;
   count: number;
   showText: () => void;
   increment: () => void;
   decrement: () => void;
-}
+};
 
-export const useStore = create<State>((set, get) => ({
+export const useStore = create<StateItems>((set, get) => ({
   show: false,
   count: 0,
   showText: () => set((state) => ({ show: !state.show })),

@@ -1,7 +1,7 @@
 "use client";
-import { createPost } from "@/lib/users/route";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Icon } from "@iconify/react";
+import { createPost } from "@/lib/users/route";
 
 const initialValue: PostItems = {
   title: "",

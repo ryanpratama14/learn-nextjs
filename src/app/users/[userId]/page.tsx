@@ -10,8 +10,10 @@ type Params = {
 };
 
 export async function generateMetadata({ params: { userId } }: Params) {
-  const userData: Promise<User> = getUser(userId);
-  const user: User = await userData;
+  // const userData: Promise<User> = getUser(userId);
+  // const user: User = await userData;
+  const user: User = await getUser(userId);
+
   if (!user?.name) {
     return {
       title: "User Not Found",
@@ -23,22 +25,24 @@ export async function generateMetadata({ params: { userId } }: Params) {
   };
 }
 
-const UserPage = async ({ params: { userId } }: Params) => {
+const UserPage = async ({
+  params: { userId },
+}: Params): Promise<React.JSX.Element> => {
   const userData: Promise<User> = getUser(userId);
   const userPostsData: Promise<Post[]> = getUserPost(userId);
   const [user, userPosts] = await Promise.all([userData, userPostsData]);
   if (!user?.name) return notFound();
 
   return (
-    <section className="flex flex-col gap-8 p-normal">
-      <div className="flex flex-col gap-4">
+    <article className="flex flex-col gap-8 p-normal">
+      <header className="flex flex-col gap-4">
         <h4>This is {user?.name}</h4>
         <Link className="btn btn-red" href="/users">
           Back to Users
         </Link>
-      </div>
+      </header>
       <Suspense fallback={<h3>Loading...</h3>}>
-        <div className="grid grid-cols-3 gap-4">
+        <section className="grid grid-cols-3 gap-4">
           {userPosts?.map((e) => {
             return (
               <div
@@ -50,17 +54,16 @@ const UserPage = async ({ params: { userId } }: Params) => {
               </div>
             );
           })}
-        </div>
+        </section>
       </Suspense>
-    </section>
+    </article>
   );
 };
 
 export default UserPage;
 
 export async function generateStaticParams() {
-  const usersData: Promise<User[]> = getAllUsers();
-  const users = await usersData;
+  const users: User[] = await getAllUsers();
   return users?.map((e) => {
     return { userId: e.id.toString() };
   });

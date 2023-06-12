@@ -33,4 +33,7 @@ type PostItems = {
   title: string;
   body: string;
   userId: number;
+  agree: boolean;
+  email: string;
+  desc: string;
 };

@@ -63,8 +63,7 @@ const UserPage = async ({
 export default UserPage;
 
 export async function generateStaticParams() {
-  const usersData: Promise<User[]> = getAllUsers();
-  const users = await usersData;
+  const users: User[] = await getAllUsers();
   return users?.map((e) => {
     return { userId: e.id.toString() };
   });

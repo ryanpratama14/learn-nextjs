@@ -28,6 +28,7 @@ const UserPage = async ({ params: { userId } }: Params) => {
   const userPostsData: Promise<Post[]> = getUserPost(userId);
   const [user, userPosts] = await Promise.all([userData, userPostsData]);
   if (!user?.name) return notFound();
+
   return (
     <section className="flex flex-col gap-8 p-normal">
       <div className="flex flex-col gap-4">

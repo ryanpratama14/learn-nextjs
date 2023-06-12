@@ -28,3 +28,9 @@ type Post = {
   title: string;
   body: string;
 };
+
+type PostItems = {
+  title: string;
+  body: string;
+  userId: number;
+};

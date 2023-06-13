@@ -91,13 +91,15 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
         <section className="flex flex-col gap-4">
           <h5>{data.title}</h5>
           <p className="whitespace-pre-line">{data.body}</p>
-          <nav className="flex flex-wrap gap-2">
-            <button className="btn-secondary" onClick={() => setIsEdit(true)}>
-              Edit
-            </button>
-            <button className="btn-red" onClick={handleDelete}>
-              Delete
-            </button>
+          <section className="flex flex-col gap-2">
+            <nav className="flex flex-wrap gap-2">
+              <button className="btn-secondary" onClick={() => setIsEdit(true)}>
+                Edit
+              </button>
+              <button className="btn-red" onClick={handleDelete}>
+                Delete
+              </button>
+            </nav>
             {comments.length ? (
               <article className="flex flex-col gap-2">
                 <h5 className="italic">Comments</h5>
@@ -129,7 +131,7 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
                 Show Comments
               </button>
             )}
-          </nav>
+          </section>
         </section>
       )}
     </article>

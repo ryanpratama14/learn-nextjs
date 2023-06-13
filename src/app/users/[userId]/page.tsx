@@ -1,6 +1,5 @@
 import { getAllUsers, getUser, getUserPost } from "@/lib/users/route";
 import Link from "next/link";
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import PostBody from "./components/PostBody";
 

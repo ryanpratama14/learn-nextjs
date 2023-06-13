@@ -45,7 +45,7 @@ const UserPage = async ({
           Back to Users
         </Link>
       </header>
-      <section className="grid grid-cols-3 gap-4">
+      <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {userPosts?.map((e) => {
           return <PostBody posts={e} key={e?.id} />;
         })}

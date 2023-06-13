@@ -12,7 +12,10 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [data, setData] = useState<Post>(posts);
-  const [comments, setComments] = useState<CommentItems[]>();
+  const [comments, setComments] = useState<CommentItems[]>([]);
+  const [seeMore, setSeeMore] = useState<boolean>(false);
+
+  const filteredComments = seeMore ? comments : comments.slice(0, 2);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -91,27 +94,40 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
             <button className="btn-red" onClick={handleDelete}>
               Delete
             </button>
-            <button className="btn-junglegreen" onClick={handleComment}>
-              Show Comments
-            </button>
+            {comments.length ? (
+              <article className="flex flex-col gap-2">
+                <h5 className="italic">Comments</h5>
+                {filteredComments?.map((e) => {
+                  return (
+                    <section
+                      key={e.id}
+                      className="flex flex-col gap-1 p-2 bg-gray-300 rounded-md"
+                    >
+                      <p>{e.name}</p>
+                      <p>{e.email}</p>
+                    </section>
+                  );
+                })}
+                <nav className="flex gap-2">
+                  <button
+                    className="btn-secondary"
+                    onClick={() => setSeeMore(!seeMore)}
+                  >
+                    {seeMore ? "Show less" : "..."}
+                  </button>
+                  <button className="btn-red" onClick={() => setComments([])}>
+                    Hide All
+                  </button>
+                </nav>
+              </article>
+            ) : (
+              <button className="btn-junglegreen" onClick={handleComment}>
+                Show Comments
+              </button>
+            )}
           </nav>
         </section>
       )}
-      {comments ? (
-        <article className="flex flex-col gap-2">
-          {comments?.map((e) => {
-            return (
-              <section
-                key={e.id}
-                className="flex flex-col gap-1 p-2 bg-gray-300 rounded-md"
-              >
-                <p>{e.name}</p>
-                <p>{e.email}</p>
-              </section>
-            );
-          })}
-        </article>
-      ) : null}
     </article>
   );
 }

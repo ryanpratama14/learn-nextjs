@@ -41,8 +41,8 @@ type PostItems = {
 };
 
 type CommentItems = {
-  postId: number;
-  id: number;
+  postId?: number;
+  id?: number;
   name: string;
   email: string;
   body: string;

@@ -16,7 +16,11 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
   const [seeMore, setSeeMore] = useState<boolean>(false);
   const filteredComments = seeMore ? comments : comments.slice(0, 2);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
     setIsDirty(value !== posts[name]);
@@ -69,11 +73,11 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
             onChange={handleChange}
             type="text"
           />
-          <input
+          <textarea
+            rows={10}
             value={data.body}
             name="body"
             onChange={handleChange}
-            type="text"
           />
           <button
             type="submit"
@@ -85,7 +89,7 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
       ) : (
         <section className="flex flex-col gap-4">
           <h5>{data.title}</h5>
-          <p>{data.body}</p>
+          <p className="whitespace-pre-line">{data.body}</p>
           <nav className="flex flex-wrap gap-2">
             <button className="btn-secondary" onClick={() => setIsEdit(true)}>
               Edit

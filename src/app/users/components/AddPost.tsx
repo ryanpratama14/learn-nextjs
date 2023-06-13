@@ -70,7 +70,6 @@ export default function AddPost(): React.JSX.Element {
           name="date"
           type="date"
           required
-          className="iOS !text-left"
         />
         <textarea
           value={data.desc}

@@ -1,5 +1,6 @@
 "use client";
-import { ChangeEvent, FormEvent, useState } from "react";
+
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Icon } from "@iconify/react";
 import { createPost } from "@/lib/users/route";
 
@@ -13,7 +14,7 @@ const initialValue: PostItems = {
   applied: false,
 };
 
-export default function AddPost() {
+export default function AddPost(): React.JSX.Element {
   const [data, setData] = useState(initialValue);
   const [newData, setNewData] = useState<PostItems>();
 

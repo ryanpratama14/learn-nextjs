@@ -38,7 +38,7 @@ export default function AddPost(): React.JSX.Element {
     <section className="flex flex-col items-center justify-center gap-12">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 items-center justify-center w-full md:w-[50%] xl:w-[30%]"
+        className="flex flex-col gap-4 items-center justify-center w-full md:w-[50%] lg:w-[35%] xl:w-[25%]"
       >
         <input
           value={data.title}
@@ -67,7 +67,6 @@ export default function AddPost(): React.JSX.Element {
         <input
           value={data.date}
           onChange={handleChange}
-          placeholder="Date"
           name="date"
           type="date"
           required
@@ -82,15 +81,15 @@ export default function AddPost(): React.JSX.Element {
           required
           rows={5}
         />
-        <section className="flex gap-2 items-center">
-          <div className="relative border-2 border-primary text-primary rounded-md">
-            <input
-              checked={data.applied}
-              onChange={handleChange}
-              name="applied"
-              type="checkbox"
-              className="absolute w-full h-full z-10 opacity-0 cursor-pointer"
-            />
+        <section className="relative flex gap-2 items-center">
+          <input
+            checked={data.applied}
+            onChange={handleChange}
+            name="applied"
+            type="checkbox"
+            className="absolute w-full left-0 z-10 opacity-0 cursor-pointer"
+          />
+          <div className="border-2 border-primary text-primary rounded-md">
             <Icon
               width={20}
               icon="mdi:check-bold"

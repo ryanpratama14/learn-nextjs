@@ -23,7 +23,7 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
   ) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
-    setIsDirty(value !== posts[name]);
+    setIsDirty(true);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,6 +32,7 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
       try {
         await putPost(data, data.id.toString());
         setIsEdit(false);
+        setIsDirty(false);
         toast.success("Saved");
       } catch (error) {
         console.log(error);
@@ -81,7 +82,7 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
           />
           <button
             type="submit"
-            className={`text-white ${isDirty ? "bg-primary" : "bg-red"}`}
+            className={`text-white ${isDirty ? "btn-primary" : "btn-red"}`}
           >
             {isDirty ? "Save Edit" : "Cancel"}
           </button>
@@ -100,7 +101,7 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
             {comments.length ? (
               <article className="flex flex-col gap-2">
                 <h5 className="italic">Comments</h5>
-                {filteredComments?.map((e) => {
+                {filteredComments.map((e) => {
                   return (
                     <section
                       key={e.id}

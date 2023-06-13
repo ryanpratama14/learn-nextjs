@@ -14,7 +14,6 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
   const [data, setData] = useState<Post>(posts);
   const [comments, setComments] = useState<CommentItems[]>([]);
   const [seeMore, setSeeMore] = useState<boolean>(false);
-
   const filteredComments = seeMore ? comments : comments.slice(0, 2);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,7 +115,7 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
                     {seeMore ? "Show less" : "..."}
                   </button>
                   <button className="btn-red" onClick={() => setComments([])}>
-                    Hide All
+                    Hide
                   </button>
                 </nav>
               </article>

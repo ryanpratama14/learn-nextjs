@@ -101,7 +101,10 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
         <article className="flex flex-col gap-2">
           {comments?.map((e) => {
             return (
-              <section className="flex flex-col gap-1 p-2 bg-gray-300 rounded-md">
+              <section
+                key={e.id}
+                className="flex flex-col gap-1 p-2 bg-gray-300 rounded-md"
+              >
                 <p>{e.name}</p>
                 <p>{e.email}</p>
               </section>

@@ -45,13 +45,11 @@ const UserPage = async ({
           Back to Users
         </Link>
       </header>
-      <Suspense fallback={<h3>Loading...</h3>}>
-        <section className="grid grid-cols-3 gap-4">
-          {userPosts?.map((e) => {
-            return <PostBody posts={e} key={e?.id} />;
-          })}
-        </section>
-      </Suspense>
+      <section className="grid grid-cols-3 gap-4">
+        {userPosts?.map((e) => {
+          return <PostBody posts={e} key={e?.id} />;
+        })}
+      </section>
     </article>
   );
 };

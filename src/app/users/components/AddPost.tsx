@@ -10,7 +10,7 @@ const initialValue: PostItems = {
   email: "",
   desc: "",
   date: "",
-  userId: 1,
+  userId: Date.now(),
   applied: false,
 };
 
@@ -105,13 +105,21 @@ export default function AddPost(): React.JSX.Element {
         </button>
       </form>
       {newData ? (
-        <section className="flex p-3 flex-col rounded-md border-2 border-primary text-primaryDarker">
-          <h4>New Data Submitted</h4>
-          <p>
-            {newData.title}, {newData.body}, {newData.date},{" "}
-            {newData.applied ? "Applied before" : "Applied for the first time"},{" "}
-            {newData.email}, {newData.desc}
-          </p>
+        <section className="flex p-3 flex-col gap-2 rounded-md border-2 border-primary">
+          <h4 className="text-primaryDarker">New Data Submitted</h4>
+          <div className="flex flex-col gap-1 text-junglegreenDarker">
+            <p>title: {newData.title}</p>
+            <p>body: {newData.body}</p>
+            <p>date: {newData.date}</p>
+            <p>
+              {newData.applied
+                ? "Applied before"
+                : "Applied for the first time"}
+            </p>
+            <p>email: {newData.email}</p>
+            <p>desc: {newData.desc}</p>
+            <p>user id: {newData.userId}</p>
+          </div>
         </section>
       ) : null}
     </section>

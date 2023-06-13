@@ -41,7 +41,7 @@ export async function createPost(postData: object) {
 
 export async function putPost(postData: object, postId: string) {
   const res = await fetch(`${publicApi}/posts/${postId}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },

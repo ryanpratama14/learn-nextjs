@@ -27,6 +27,7 @@ type Post = {
   id: number;
   title: string;
   body: string;
+  [key?: string]: string;
 };
 
 type PostItems = {
@@ -37,4 +38,12 @@ type PostItems = {
   email: string;
   desc: string;
   date: string;
+};
+
+type CommentItems = {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
 };

@@ -13,9 +13,15 @@ export async function getUser(userId: string) {
   return res?.json();
 }
 
+export async function getComments(postId: string) {
+  const res = await fetch(`${publicApi}/comments?postId=${postId}`);
+  if (!res?.ok) undefined;
+  return res?.json();
+}
+
 export async function getUserPost(userId: string) {
   const res = await fetch(`${api}/posts?userId=${userId}`, {
-    next: { revalidate: 60 },
+    next: { revalidate: 2 },
   });
   if (!res?.ok) throw new Error("Failed to fetch user's post");
   return res?.json();
@@ -42,5 +48,13 @@ export async function putPost(postData: object, postId: string) {
     body: JSON.stringify(postData),
   });
   if (!res?.ok) throw new Error("Failed to edit post");
+  return res?.json();
+}
+
+export async function deletePost(postId: string) {
+  const res = await fetch(`${publicApi}/posts/${postId}`, {
+    method: "DELETE",
+  });
+  if (!res?.ok) throw new Error("Failed to delete post");
   return res?.json();
 }

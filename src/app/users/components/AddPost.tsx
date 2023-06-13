@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { createPost } from "@/lib/users/route";
 
@@ -18,12 +18,12 @@ export default function AddPost(): React.JSX.Element {
   const [data, setData] = useState(initialValue);
   const [newData, setNewData] = useState<PostItems>();
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, value, checked } = e.target;
     setData({ ...data, [name]: type === "checkbox" ? checked : value });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await createPost(data);
@@ -74,7 +74,7 @@ export default function AddPost(): React.JSX.Element {
         />
         <textarea
           value={data.desc}
-          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             setData({ ...data, desc: e.target.value })
           }
           placeholder="Description"

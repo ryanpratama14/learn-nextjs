@@ -33,14 +33,14 @@ export async function createPost(postData: object) {
   return res?.json();
 }
 
-export async function putPost(postData: object, userId: string) {
-  const res = await fetch(`${publicApi}/posts/${userId}`, {
+export async function putPost(postData: object, postId: string) {
+  const res = await fetch(`${publicApi}/posts/${postId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(postData),
   });
-  if (!res?.ok) throw new Error("Failed to create post");
+  if (!res?.ok) throw new Error("Failed to edit post");
   return res?.json();
 }

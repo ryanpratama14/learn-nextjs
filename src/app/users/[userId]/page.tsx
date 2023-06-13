@@ -2,6 +2,7 @@ import { getAllUsers, getUser, getUserPost } from "@/lib/users/route";
 import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import PostBody from "./components/PostBody";
 
 type Params = {
   params: {
@@ -28,9 +29,12 @@ export async function generateMetadata({ params: { userId } }: Params) {
 const UserPage = async ({
   params: { userId },
 }: Params): Promise<React.JSX.Element> => {
-  const userData: Promise<User> = getUser(userId);
-  const userPostsData: Promise<Post[]> = getUserPost(userId);
-  const [user, userPosts] = await Promise.all([userData, userPostsData]);
+  // const userData: Promise<User> = getUser(userId);
+  // const userPostsData: Promise<Post[]> = getUserPost(userId);
+  const [user, userPosts]: [User, Post[]] = await Promise.all([
+    getUser(userId),
+    getUserPost(userId),
+  ]);
   if (!user?.name) return notFound();
 
   return (
@@ -44,15 +48,7 @@ const UserPage = async ({
       <Suspense fallback={<h3>Loading...</h3>}>
         <section className="grid grid-cols-3 gap-4">
           {userPosts?.map((e) => {
-            return (
-              <div
-                key={e?.id}
-                className="rounded-md px-6 py-4 bg-white flex flex-col gap-4"
-              >
-                <h5>{e?.title}</h5>
-                <p>{e?.body}</p>
-              </div>
-            );
+            return <PostBody posts={e} key={e?.id} />;
           })}
         </section>
       </Suspense>

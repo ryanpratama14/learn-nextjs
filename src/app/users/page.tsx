@@ -1,4 +1,4 @@
-import { getAllUsers } from "@/lib/users/route";
+import { getAllUsers, getTokyoTime } from "@/lib/users/route";
 import Link from "next/link";
 import AddPost from "./components/AddPost";
 import { Metadata } from "next";
@@ -11,7 +11,7 @@ const UsersPage = async (): Promise<JSX.Element> => {
   // const usersData: Promise<User[]> = getAllUsers();
   // const users = await usersData;
   const users: User[] = await getAllUsers();
-
+  const time: any = await getTokyoTime();
   return (
     <article className="gap-8 flex flex-col p-normal">
       <header className="flex flex-col justify-center items-center gap-4">
@@ -19,6 +19,7 @@ const UsersPage = async (): Promise<JSX.Element> => {
         <Link href="/" className="btn btn-primary">
           Back to Main Page
         </Link>
+        <h5>Tokyo time: {time.datetime}</h5>
       </header>
       <section className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {users?.map((e) => {

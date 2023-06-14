@@ -7,8 +7,20 @@ export async function getAllUsers() {
   return res?.json();
 }
 
+export async function getTokyoTime() {
+  const res = await fetch(`https://worldtimeapi.org/api/timezone/Asia/Tokyo`, {
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("Failed to fetch time data");
+  return res.json();
+}
+
 export async function getUser(userId: string) {
-  const res = await fetch(`${api}/users/${userId}`);
+  const res = await fetch(`${api}/users/${userId}`, {
+    next: {
+      revalidate: 5,
+    },
+  });
   if (!res?.ok) undefined;
   return res?.json();
 }

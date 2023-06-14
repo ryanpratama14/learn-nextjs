@@ -21,7 +21,7 @@ export async function getComments(postId: string) {
 
 export async function getUserPost(userId: string) {
   const res = await fetch(`${api}/posts?userId=${userId}`, {
-    next: { revalidate: 2 },
+    next: { revalidate: 10 },
   });
   if (!res?.ok) throw new Error("Failed to fetch user's post");
   return res?.json();

@@ -9,10 +9,10 @@ type Params = {
 };
 
 export default function PostBody({ posts }: Params): React.JSX.Element {
+  const [data, setData] = useState(posts);
+  const [comments, setComments] = useState<CommentItems[]>([]);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isDirty, setIsDirty] = useState<boolean>(false);
-  const [data, setData] = useState<Post>(posts);
-  const [comments, setComments] = useState<CommentItems[]>([]);
   const [seeMore, setSeeMore] = useState<boolean>(false);
   const filteredComments = seeMore ? comments : comments.slice(0, 2);
 
@@ -23,7 +23,7 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
   ) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
-    setIsDirty(true);
+    setIsDirty(value !== posts[name]);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

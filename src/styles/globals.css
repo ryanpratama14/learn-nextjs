@@ -19,7 +19,7 @@
     @apply py-2;
   }
   button {
-    @apply py-2 px-6 active:scale-95 transition-all outline-none rounded-md w-fit;
+    @apply py-2 px-6 active:scale-95 animate outline-none hover:rounded-none rounded-2xl w-fit;
   }
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl font-bold;
@@ -47,7 +47,7 @@
     @apply transition-all duration-300;
   }
   .btn {
-    @apply py-2 px-6 active:scale-95 transition-all outline-none rounded-md w-fit;
+    @apply py-2 px-6 active:scale-95 animate outline-none hover:rounded-none rounded-2xl w-fit;
   }
   .btn-primary {
     @apply text-white bg-primary hover:bg-primaryDarker;

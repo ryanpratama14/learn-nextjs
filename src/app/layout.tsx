@@ -23,7 +23,11 @@ export default function RootLayout({ children }: Props): React.JSX.Element {
       <body
         className={`${montserrat.className} from-neutral-100 to-neutral-200 bg-gradient-to-b`}
       >
-        <Toaster />
+        <Toaster
+          toastOptions={{
+            className: "font-medium",
+          }}
+        />
         {children}
       </body>
     </html>

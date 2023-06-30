@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { createPost } from "@/lib/users/route";
+import Input from "@/components/Input";
+import TextArea from "@/components/TextArea";
 
 const initialValue: PostItems = {
   title: "",
@@ -29,6 +31,7 @@ export default function AddPost(): React.JSX.Element {
       const res = await createPost(data);
       setNewData(res);
       setData(initialValue);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -40,50 +43,56 @@ export default function AddPost(): React.JSX.Element {
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 items-center justify-center w-full md:w-[50%] lg:w-[35%] xl:w-[25%]"
       >
-        <input
-          value={data.title}
+        <Input
+          label="Title"
+          placeholder="Tom & Jerry"
           onChange={handleChange}
-          placeholder="Title"
           name="title"
+          value={data.title}
           type="text"
-          required
+          required={true}
         />
-        <input
-          value={data.body}
+        <Input
+          label="Body"
+          placeholder="Tom & Jerry This Night"
           onChange={handleChange}
-          placeholder="Body"
           name="body"
+          value={data.body}
           type="text"
-          required
+          required={true}
         />
-        <input
-          value={data.email}
+        <Input
+          label="Email"
+          placeholder="tomjerry@outlook.com"
           onChange={handleChange}
-          placeholder="Email"
           name="email"
+          value={data.email}
           type="email"
-          required
+          required={true}
         />
-        <input
-          value={data.date}
+        <Input
+          label="Date"
           onChange={handleChange}
           name="date"
+          value={data.date}
           type="date"
-          required
+          required={true}
         />
-        <textarea
+        <TextArea
+          label="Description"
+          onChange={(e) => setData({ ...data, desc: e.target.value })}
+          name="desc"
+          placeholder="It begins when..."
           value={data.desc}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-            setData({ ...data, desc: e.target.value })
-          }
-          placeholder="Description"
-          required
+          required={true}
           rows={5}
         />
-        <section className="relative flex gap-2 items-center">
+        <section className="relative flex flex-row-reverse gap-2 items-center">
+          <label htmlFor="applied">Did you applied before?</label>
           <input
             checked={data.applied}
             onChange={handleChange}
+            id="applied"
             name="applied"
             type="checkbox"
             className="absolute w-full left-0 z-10 opacity-0 cursor-pointer"
@@ -97,7 +106,6 @@ export default function AddPost(): React.JSX.Element {
               }`}
             />
           </div>
-          <label>Did you applied before?</label>
         </section>
         <button type="submit" className="btn-primary">
           Submit

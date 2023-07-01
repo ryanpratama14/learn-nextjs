@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { PacmanLoader } from "react-spinners";
 
 export default function loading(): React.JSX.Element {

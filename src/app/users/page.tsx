@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Users",
 };
 
-const UsersPage = async (): Promise<JSX.Element> => {
+const UsersPage = async (): Promise<React.JSX.Element> => {
   // const usersData: Promise<User[]> = getAllUsers();
   // const users = await usersData;
   const users: User[] = await getAllUsers();

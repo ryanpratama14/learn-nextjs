@@ -1,7 +1,7 @@
 "use client";
 
 import { deletePost, getComments, putPost } from "@/lib/users/route";
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 type Params = {

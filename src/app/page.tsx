@@ -7,6 +7,9 @@ export default function Home(): React.JSX.Element {
       <Link className="btn btn-primary" href="/users">
         See Users
       </Link>
+      <Link className="btn btn-primary" href="/todos">
+        See Todos
+      </Link>
     </main>
   );
 }

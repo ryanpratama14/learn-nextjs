@@ -1,5 +1,7 @@
 "use client";
 
+import Input from "@/components/Input";
+import TextArea from "@/components/TextArea";
 import { deletePost, getComments, putPost } from "@/lib/users/route";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -68,13 +70,13 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
     <article className="rounded-md px-6 py-4 flex flex-col gap-4 bg-white">
       {isEdit ? (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
+          <Input
             value={data.title}
             name="title"
             onChange={handleChange}
             type="text"
           />
-          <textarea
+          <TextArea
             rows={10}
             value={data.body}
             name="body"

@@ -2,7 +2,7 @@ import { ChangeEventHandler } from "react";
 
 type Props = {
   name: string;
-  label: string;
+  label?: string;
   value: string | number | readonly string[];
   onChange: ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
@@ -21,9 +21,11 @@ export default function Input({
 }: Props): React.JSX.Element {
   return (
     <section className="flex flex-col w-full">
-      <label className="ml-1 text-yellow-800" htmlFor={name}>
-        {label}
-      </label>
+      {label ? (
+        <label className="ml-1 text-yellow-800" htmlFor={name}>
+          {label}
+        </label>
+      ) : null}
       <input
         value={value}
         onChange={onChange}

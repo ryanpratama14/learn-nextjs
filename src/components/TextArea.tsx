@@ -1,10 +1,8 @@
-import { ChangeEventHandler } from "react";
-
 type Props = {
   name: string;
-  label: string;
+  label?: string;
   value: string | number | readonly string[];
-  onChange: ChangeEventHandler<HTMLTextAreaElement>;
+  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   placeholder?: string;
   required?: boolean;
   rows?: number;
@@ -21,9 +19,11 @@ export default function TextArea({
 }: Props): React.JSX.Element {
   return (
     <section className="flex flex-col w-full">
-      <label className="ml-1 text-yellow-800" htmlFor={name}>
-        {label}
-      </label>
+      {label ? (
+        <label className="ml-1 text-yellow-800" htmlFor={name}>
+          {label}
+        </label>
+      ) : null}
       <textarea
         value={value}
         onChange={onChange}

@@ -80,7 +80,9 @@ export default function AddPost(): React.JSX.Element {
         />
         <TextArea
           label="Description"
-          onChange={(e) => setData({ ...data, desc: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            setData({ ...data, desc: e.target.value })
+          }
           name="desc"
           placeholder="It begins when..."
           value={data.desc}

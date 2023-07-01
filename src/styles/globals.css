@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.iOS {
-  appearance: none;
-  -webkit-appearance: none;
-}
-
 @layer base {
+  html {
+    @apply scroll-smooth from-neutral-100 to-neutral-200 bg-gradient-to-b;
+  }
   input,
   textarea {
     @apply px-2 rounded-md border-2 border-primary outline-none w-full;
@@ -88,4 +86,9 @@
   .pSmaller2 {
     @apply text-xs font-normal;
   }
+}
+
+.iOS {
+  appearance: none;
+  -webkit-appearance: none;
 }

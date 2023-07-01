@@ -13,7 +13,7 @@ const UsersPage = async (): Promise<React.JSX.Element> => {
   const users: User[] = await getAllUsers();
   const time: any = await getTokyoTime();
   return (
-    <article className="gap-8 flex flex-col p-normal">
+    <main className="gap-8 flex flex-col p-normal">
       <header className="flex flex-col justify-center items-center gap-4">
         <h2 className="text-primary">Users List</h2>
         <Link href="/" className="btn btn-primary">
@@ -43,7 +43,7 @@ const UsersPage = async (): Promise<React.JSX.Element> => {
         })}
       </section>
       <AddPost />
-    </article>
+    </main>
   );
 };
 

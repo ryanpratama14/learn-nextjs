@@ -19,10 +19,8 @@ type Props = {
 
 export default function RootLayout({ children }: Props): React.JSX.Element {
   return (
-    <html lang="en">
-      <body
-        className={`${montserrat.className} from-neutral-100 to-neutral-200 bg-gradient-to-b`}
-      >
+    <html lang="en" className={montserrat.className}>
+      <body>
         <Toaster
           toastOptions={{
             className: "font-medium",

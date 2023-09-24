@@ -1,5 +1,4 @@
-import { API_URL } from "@/utils/utils";
-import { deleteData, getData, patchData, postData, putData } from "../api";
+import { deleteData, getData, patchData, postData } from "../api";
 
 export async function getTokyoTime() {
   const res = await fetch(`https://worldtimeapi.org/api/timezone/Asia/Tokyo`, {
@@ -21,7 +20,7 @@ export function getUserPost(params: { userId: string }) {
   return getData(`/posts`, params);
 }
 
-export function putPost(body: object, id: string) {
+export function putPost(body: Post, id: string) {
   return patchData(`/posts/${id}`, body);
 }
 

@@ -25,7 +25,6 @@ export async function getData(url: string, paramsProps?: object) {
   const queryString = paramString ? `?${paramString}` : "";
 
   const res = await fetch(`${API_URL}${url}${queryString}`, {
-    cache: "no-store",
     headers,
   });
 

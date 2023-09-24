@@ -1,6 +1,4 @@
 import { API_URL } from "@/utils/utils";
-import { object } from "prop-types";
-
 const token = "token";
 
 export async function getData(

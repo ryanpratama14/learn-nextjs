@@ -64,6 +64,29 @@ export async function postData<T>(url: string, body: T) {
   return res.json();
 }
 
+// POST FORMDATA
+export async function postFormData(url: string, body: FormData) {
+  const headers: HeadersInit | undefined = {
+    "Content-Type": "multipart/form-data",
+  };
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(`${API_URL}${url}`, {
+    method: "POST",
+    headers,
+    body: body,
+  });
+
+  if (res.status === 401) {
+    return console.log("UNAUTHORIZED");
+  }
+
+  return res.json();
+}
+
 // PUT
 export async function putData<T>(url: string, body: T) {
   const headers: HeadersInit | undefined = {

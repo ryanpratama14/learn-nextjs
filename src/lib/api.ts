@@ -3,7 +3,11 @@ import { object } from "prop-types";
 
 const token = "token";
 
-export async function getData(url: string, paramsProps?: object) {
+export async function getData(
+  url: string,
+  paramsProps?: object,
+  cache?: RequestCache
+) {
   let headers: HeadersInit | undefined = undefined;
 
   if (token) {
@@ -25,6 +29,7 @@ export async function getData(url: string, paramsProps?: object) {
   const queryString = paramString ? `?${paramString}` : "";
 
   const res = await fetch(`${API_URL}${url}${queryString}`, {
+    cache: cache ? cache : undefined,
     headers,
   });
 

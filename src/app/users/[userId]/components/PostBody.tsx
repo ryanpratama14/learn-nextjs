@@ -58,7 +58,9 @@ export default function PostBody({ posts }: Params): React.JSX.Element {
 
   const handleComment = async () => {
     try {
-      const res = await getComments(posts.id.toString());
+      const res = await getComments({
+        postId: posts.id.toString(),
+      });
       setComments(res);
       toast.success("Comments showed");
     } catch (error) {

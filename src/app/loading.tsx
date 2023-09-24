@@ -1,10 +1,10 @@
 "use client";
-import { PacmanLoader } from "react-spinners";
+import { SyncLoader } from "react-spinners";
 
-export default function loading(): React.JSX.Element {
+export default function Loading() {
   return (
-    <section className="min-h-screen flex gap-2 items-center justify-center">
-      <PacmanLoader color="#1D7874" size={100} />
-    </section>
+    <article className="min-h-screen flex items-center justify-center">
+      <SyncLoader size={20} />
+    </article>
   );
 }

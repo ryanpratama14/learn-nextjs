@@ -2,6 +2,7 @@ import { getAllUsers, getTokyoTime } from "@/lib/users/route";
 import Link from "next/link";
 import AddPost from "./components/AddPost";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Users",
@@ -10,8 +11,12 @@ export const metadata: Metadata = {
 const UsersPage = async (): Promise<React.JSX.Element> => {
   // const usersData: Promise<User[]> = getAllUsers();
   // const users = await usersData;
-  const users: User[] = await getAllUsers();
+  const users: User[] = await getAllUsers({
+    limit: 1,
+    page: 1,
+  });
   const time: any = await getTokyoTime();
+
   return (
     <main className="gap-8 flex flex-col p-normal">
       <header className="flex flex-col justify-center items-center gap-4">
@@ -21,27 +26,29 @@ const UsersPage = async (): Promise<React.JSX.Element> => {
         </Link>
         <h5>Tokyo time: {time.datetime}</h5>
       </header>
-      <section className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {users?.map((e) => {
-          return (
-            <div
-              key={e?.id}
-              className="p-4 flex flex-col gap-4 rounded-md bg-white"
-            >
-              <div className="flex flex-col gap-2">
-                <h5>{e?.name}</h5>
-                <p>{e?.username}</p>
-                <p>{e?.email}</p>
+      <Suspense fallback={<p>Loading..</p>}>
+        <section className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {users?.map((e) => {
+            return (
+              <div
+                key={e?.id}
+                className="p-4 flex flex-col gap-4 rounded-md bg-white"
+              >
+                <div className="flex flex-col gap-2">
+                  <h5>{e?.name}</h5>
+                  <p>{e?.username}</p>
+                  <p>{e?.email}</p>
+                </div>
+                <div className="flex justify-end">
+                  <Link className="btn btn-red" href={`/users/${e?.id}`}>
+                    More information
+                  </Link>
+                </div>
               </div>
-              <div className="flex justify-end">
-                <Link className="btn btn-red" href={`/users/${e?.id}`}>
-                  More information
-                </Link>
-              </div>
-            </div>
-          );
-        })}
-      </section>
+            );
+          })}
+        </section>
+      </Suspense>
       <AddPost />
     </main>
   );

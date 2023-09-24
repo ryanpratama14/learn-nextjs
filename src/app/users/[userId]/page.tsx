@@ -32,7 +32,9 @@ const UserPage = async ({
   // const userPostsData: Promise<Post[]> = getUserPost(userId);
   const [user, userPosts]: [User, Post[]] = await Promise.all([
     getUser(userId),
-    getUserPost(userId),
+    getUserPost({
+      userId: userId,
+    }),
   ]);
   if (!user?.name) return notFound();
 

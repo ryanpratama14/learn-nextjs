@@ -1,10 +1,5 @@
-export const api = process.env.NEXT_PUBLIC_API;
-
-export async function getAllUsers() {
-  const res = await fetch(`${api}/users`);
-  if (!res?.ok) throw new Error("failed to fetch data");
-  return res?.json();
-}
+import { API_URL } from "@/utils/utils";
+import { deleteData, getData, patchData, postData, putData } from "../api";
 
 export async function getTokyoTime() {
   const res = await fetch(`https://worldtimeapi.org/api/timezone/Asia/Tokyo`, {
@@ -14,64 +9,34 @@ export async function getTokyoTime() {
   return res.json();
 }
 
-export async function getUser(userId: string) {
-  const res = await fetch(`${api}/users/${userId}`, {
-    next: {
-      revalidate: 5,
-    },
-  });
-  if (!res?.ok) undefined;
-  return res?.json();
+export function getUser(id: string) {
+  return getData(`/users/${id}`);
 }
 
-export async function getComments(postId: string) {
-  const res = await fetch(`${api}/comments?postId=${postId}`);
-  if (!res?.ok) undefined;
-  return res?.json();
+export function getComments(params: { postId: string }) {
+  return getData(`/comments`, params);
 }
 
-export async function getUserPost(userId: string) {
-  const res = await fetch(`${api}/posts?userId=${userId}`, {
-    next: { revalidate: 10 },
-  });
-  if (!res?.ok) throw new Error("Failed to fetch user's post");
-  return res?.json();
+export function getUserPost(params: { userId: string }) {
+  return getData(`/posts`, params);
 }
 
-export async function createPost(postData: object) {
-  const res = await fetch(`${api}/posts`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postData),
-  });
-  if (!res?.ok) throw new Error("Failed to create post");
-  return res?.json();
+export function putPost(body: object, id: string) {
+  return patchData(`/posts/${id}`, body);
 }
 
-export async function putPost(postData: object, postId: string) {
-  const res = await fetch(`${api}/posts/${postId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postData),
-  });
-  if (!res?.ok) throw new Error("Failed to edit post");
-  return res?.json();
+export function deletePost(id: string) {
+  return deleteData(`posts/${id}`);
 }
 
-export async function deletePost(postId: string) {
-  const res = await fetch(`${api}/posts/${postId}`, {
-    method: "DELETE",
-  });
-  if (!res?.ok) throw new Error("Failed to delete post");
-  return res?.json();
+export function getTodos() {
+  return getData(`/todos`);
 }
 
-export async function getTodos() {
-  const res = await fetch(`${api}/todos`);
-  if (!res?.ok) throw new Error("Failed to delete post");
-  return res?.json();
+export function createPost(body: PostItems) {
+  return postData(`/posts`, body);
+}
+
+export function getAllUsers(params?: { limit: number; page: number }) {
+  return getData(`/users`, params);
 }

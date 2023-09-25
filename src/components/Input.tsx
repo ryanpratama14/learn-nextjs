@@ -1,12 +1,10 @@
-import { ChangeEventHandler } from "react";
-
 type Props = {
   name: string;
   label?: string;
   value: string | number | readonly string[];
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
-  type: "text" | "email" | "date";
+  type: React.HTMLInputTypeAttribute;
   required?: boolean;
 };
 

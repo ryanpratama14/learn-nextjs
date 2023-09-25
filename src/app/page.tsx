@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Login from "./login";
 
 export default function Home(): React.JSX.Element {
   return (
@@ -10,6 +11,7 @@ export default function Home(): React.JSX.Element {
       <Link className="btn btn-primary" href="/todos">
         See Todos
       </Link>
+      <Login />
     </main>
   );
 }

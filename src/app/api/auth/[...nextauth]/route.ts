@@ -1,32 +1,24 @@
-import NextAuth, { getServerSession } from "next-auth/next";
+import nextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
-
       credentials: {
-        username: {
-          type: "text",
-        },
-        password: { type: "password" },
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
       },
-
       async authorize(credentials) {
-        const res = await fetch("https://dummyjson.com/auth/login", {
+        const res = await fetch(`https://dummyjson.com/auth/login`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
           body: JSON.stringify(credentials),
+          headers: { "Content-Type": "application/json" },
         });
         const user = await res.json();
-
-        if (res.ok && user) {
+        if (user) {
           return user;
         }
-
         return null;
       },
     }),
@@ -41,8 +33,11 @@ const handler = NextAuth({
     },
   },
   pages: {
-    signIn: "/",
+    signIn: "/login",
   },
-});
+  secret: process.env.NEXTAUTH_SECRET,
+};
+
+const handler = nextAuth(authOptions);
 
 export { handler as GET, handler as POST };

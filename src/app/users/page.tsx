@@ -11,10 +11,7 @@ export const metadata: Metadata = {
 const UsersPage = async (): Promise<React.JSX.Element> => {
   // const usersData: Promise<User[]> = getAllUsers();
   // const users = await usersData;
-  const users: User[] = await getAllUsers({
-    limit: 1,
-    page: 1,
-  });
+  const users: User[] = await getAllUsers();
   const time: any = await getTokyoTime();
 
   return (

@@ -1,5 +1,5 @@
-import { API_URL } from "@/utils/utils";
-const token = "token";
+import { API_URL, getToken } from "@/utils/utils";
+const token = getToken();
 
 export async function getData(
   url: string,

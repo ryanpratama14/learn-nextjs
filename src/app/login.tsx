@@ -28,11 +28,9 @@ export default function Login() {
       });
 
       const user = await resp.json();
-      console.log(user)
       if (typeof window !== "undefined") {
         localStorage.setItem("token", user.token);
       }
-
       if (res?.ok) {
         router.push("/users");
       }

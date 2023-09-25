@@ -36,6 +36,6 @@ export function createPost(body: PostItems) {
   return postData(`/posts`, body);
 }
 
-export function getAllUsers(params?: { limit: number; page: number }) {
-  return getData(`/users`, params);
+export async function getAllUsers(params?: { limit: number; page: number }) {
+  return await getData(`/users`, params);
 }

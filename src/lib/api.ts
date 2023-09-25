@@ -4,7 +4,7 @@ const token = "token";
 export async function getData(
   url: string,
   paramsProps?: object,
-  cache?: RequestCache
+  cacheType?: RequestCache
 ) {
   let headers: HeadersInit | undefined = undefined;
 
@@ -27,13 +27,12 @@ export async function getData(
   const queryString = paramString ? `?${paramString}` : "";
 
   const res = await fetch(`${API_URL}${url}${queryString}`, {
-    cache: cache ? cache : undefined,
+    cache: cacheType ? cacheType : undefined,
     headers,
   });
 
   if (res.status === 401) {
-    console.log("UNAUTHORIZED");
-    return null;
+    return console.log("UNAUTHORIZED");
   }
 
   return res.json();

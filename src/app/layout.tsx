@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { Montserrat } from "next/font/google";
 import { Metadata } from "next";
+import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: "Ryan's Next App",
@@ -21,12 +22,14 @@ export default function RootLayout({ children }: Props): React.JSX.Element {
   return (
     <html lang="en" className={montserrat.className}>
       <body>
-        <Toaster
-          toastOptions={{
-            className: "font-medium",
-          }}
-        />
-        {children}
+        <Providers>
+          <Toaster
+            toastOptions={{
+              className: "font-medium",
+            }}
+          />
+          {children}
+        </Providers>
       </body>
     </html>
   );

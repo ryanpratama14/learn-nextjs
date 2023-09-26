@@ -17,18 +17,15 @@ export default function Login() {
   const [data, setData] = useState(initialData);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const res = await signIn("credentials", {
-        username: data.username,
-        password: data.password,
-        redirect: false,
-      });
+    const res = await signIn("credentials", {
+      username: data.username,
+      password: data.password,
+      redirect: false,
+    });
 
-      if (res?.ok) {
-        router.push("/users");
-      }
-    } catch (error) {
-      console.log(error);
+    if (!res?.error) {
+      router.push("/users");
+    } else {
       toast.error("Username or password incorrect");
     }
   };

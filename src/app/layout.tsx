@@ -18,7 +18,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function RootLayout({ children }: Props): React.JSX.Element {
+export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={montserrat.className}>
       <body>

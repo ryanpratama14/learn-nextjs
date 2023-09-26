@@ -15,8 +15,9 @@ export const authOptions: NextAuthOptions = {
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
         });
+
         const user = await res.json();
-        if (user) {
+        if (res.ok && user && res.status === 200) {
           return user;
         }
         return null;

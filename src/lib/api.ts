@@ -1,16 +1,17 @@
-import { API_URL, getToken } from "@/utils/utils";
-const token = getToken();
+import { API_URL } from "@/utils/utils";
+import { getSession, signOut } from "next-auth/react";
 
 export async function getData(
   url: string,
   paramsProps?: object,
   cacheType?: RequestCache
 ) {
+  const session = await getSession();
   let headers: HeadersInit | undefined = undefined;
 
-  if (token) {
+  if (session) {
     headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${session.user.token}`,
     };
   }
 
@@ -32,7 +33,7 @@ export async function getData(
   });
 
   if (res.status === 401) {
-    return console.log("UNAUTHORIZED");
+    return signOut();
   }
 
   return res.json();
@@ -40,12 +41,13 @@ export async function getData(
 
 // POST
 export async function postData<T>(url: string, body: T) {
+  const session = await getSession();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
   };
 
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+  if (session) {
+    headers["Authorization"] = `Bearer ${session.user.token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
@@ -55,7 +57,7 @@ export async function postData<T>(url: string, body: T) {
   });
 
   if (res.status === 401) {
-    return console.log("UNAUTHORIZED");
+    return signOut();
   }
 
   return res.json();
@@ -63,12 +65,13 @@ export async function postData<T>(url: string, body: T) {
 
 // POST FORMDATA
 export async function postFormData(url: string, body: FormData) {
+  const session = await getSession();
   const headers: HeadersInit | undefined = {
     "Content-Type": "multipart/form-data",
   };
 
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+  if (session) {
+    headers["Authorization"] = `Bearer ${session.user.token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
@@ -86,12 +89,13 @@ export async function postFormData(url: string, body: FormData) {
 
 // PUT
 export async function putData<T>(url: string, body: T) {
+  const session = await getSession();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
   };
 
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+  if (session) {
+    headers["Authorization"] = `Bearer ${session.user.token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
@@ -101,7 +105,7 @@ export async function putData<T>(url: string, body: T) {
   });
 
   if (res.status === 401) {
-    return console.log("UNAUTHORIZED");
+    return signOut();
   }
 
   return res.json();
@@ -109,12 +113,13 @@ export async function putData<T>(url: string, body: T) {
 
 // PATCH
 export async function patchData<T>(url: string, body: T) {
+  const session = await getSession();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
   };
 
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+  if (session) {
+    headers["Authorization"] = `Bearer ${session.user.token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
@@ -124,7 +129,7 @@ export async function patchData<T>(url: string, body: T) {
   });
 
   if (res.status === 401) {
-    return console.log("UNAUTHORIZED");
+    return signOut();
   }
 
   return res.json();
@@ -132,11 +137,12 @@ export async function patchData<T>(url: string, body: T) {
 
 // DELETE
 export async function deleteData(url: string) {
+  const session = await getSession();
   let headers: HeadersInit | undefined = undefined;
 
-  if (token) {
+  if (session) {
     headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${session.user.token}`,
     };
   }
 
@@ -146,7 +152,7 @@ export async function deleteData(url: string) {
   });
 
   if (res.status === 401) {
-    return console.log("UNAUTHORIZED");
+    return signOut();
   }
 
   return res.json();

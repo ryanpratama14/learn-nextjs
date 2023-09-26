@@ -3,26 +3,15 @@ import Link from "next/link";
 import AddPost from "./components/AddPost";
 import { Metadata } from "next";
 import { Suspense } from "react";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/options";
 import Logout from "@/components/Logout";
-// import toast from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Users",
 };
 
 const UsersPage = async (): Promise<React.JSX.Element> => {
-  // const usersData: Promise<User[]> = getAllUsers();
-  // const users = await usersData;
-  const session = await getServerSession(authOptions);
   const users: User[] = await getAllUsers();
   const time: any = await getTokyoTime();
-
-  if (!session || !session.user) {
-    redirect("/");
-  }
 
   return (
     <main className="gap-8 flex flex-col p-normal">

@@ -1,12 +1,14 @@
 "use client";
 
 import Input from "@/components/Input";
+import { postData } from "@/lib/api";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const initialData = {
-  username: "kminchelle",
+  username: "kminchelles",
   password: "0lelplR",
 };
 
@@ -21,21 +23,13 @@ export default function Login() {
         password: data.password,
         redirect: false,
       });
-      const resp = await fetch(`https://dummyjson.com/auth/login`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      });
 
-      const user = await resp.json();
-      if (typeof window !== "undefined") {
-        localStorage.setItem("token", user.token);
-      }
       if (res?.ok) {
         router.push("/users");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Username or password incorrect");
     }
   };
 

@@ -10,7 +10,7 @@ export default async function DashboardLayout({
   const session = await getServerSession();
 
   if (!session || !session.user) {
-    redirect("/");
+    return redirect("/");
   }
 
   return <Fragment>{children}</Fragment>;

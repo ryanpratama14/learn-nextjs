@@ -1,4 +1,4 @@
-import { getTodos } from "@/lib/users/route";
+import { getTodos } from "@/api/users/route";
 import Link from "next/link";
 
 export default async function Todos(): Promise<React.JSX.Element> {

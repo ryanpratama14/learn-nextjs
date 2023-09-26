@@ -1,4 +1,4 @@
-import { getAllUsers, getTokyoTime } from "@/lib/users/route";
+import { getAllUsers, getTokyoTime } from "@/api/users/route";
 import Link from "next/link";
 import AddPost from "./components/AddPost";
 import { Metadata } from "next";

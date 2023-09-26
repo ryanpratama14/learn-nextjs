@@ -1,7 +1,7 @@
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import { Metadata } from "next";
-import Providers from "./providers";
+import Providers from "@/global/providers";
 
 export const metadata: Metadata = {
   title: "Ryan's Next App",

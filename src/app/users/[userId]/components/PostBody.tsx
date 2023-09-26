@@ -2,7 +2,7 @@
 
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
-import { deletePost, getComments, putPost } from "@/lib/users/route";
+import { deletePost, getComments, putPost } from "@/api/users/route";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 

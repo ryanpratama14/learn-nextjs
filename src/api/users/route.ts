@@ -1,4 +1,4 @@
-import { deleteData, getData, patchData, postData } from "../api";
+import { deleteData, getData, patchData, postData } from "@/api/api";
 
 export async function getTokyoTime() {
   const res = await fetch(`https://worldtimeapi.org/api/timezone/Asia/Tokyo`, {

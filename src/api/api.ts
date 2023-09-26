@@ -1,4 +1,4 @@
-import { API_URL } from "@/utils/utils";
+import { API_URL } from "@/lib/utils";
 import { getSession, signOut } from "next-auth/react";
 
 export async function getData(

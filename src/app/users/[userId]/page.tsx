@@ -1,4 +1,4 @@
-import { getAllUsers, getUser, getUserPost } from "@/lib/users/route";
+import { getAllUsers, getUser, getUserPost } from "@/api/users/route";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import PostBody from "./components/PostBody";

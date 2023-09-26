@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Icon } from "@iconify/react";
-import { createPost } from "@/lib/users/route";
+import { createPost } from "@/api/users/route";
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
 

@@ -1,14 +1,13 @@
 "use client";
 
 import Input from "@/components/Input";
-import { postData } from "@/lib/api";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 const initialData = {
-  username: "kminchelles",
+  username: "kminchelle",
   password: "0lelplR",
 };
 
@@ -38,7 +37,10 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center justify-center flex-col gap-4"
+    >
       <Input
         value={data.username}
         name="username"
@@ -51,7 +53,9 @@ export default function Login() {
         onChange={handleChange}
         type="password"
       />
-      <button type="submit">Login</button>
+      <button className="mt-2 btn btn-secondary" type="submit">
+        Login
+      </button>
     </form>
   );
 }

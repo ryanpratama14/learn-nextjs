@@ -1,7 +1,7 @@
-import React from 'react'
-
-export default function page() {
+export default function DashboardPage() {
   return (
-    <div>page</div>
-  )
+    <article className="min-h-screen flex items-center justify-center">
+      <h2>Protected Route</h2>
+    </article>
+  );
 }

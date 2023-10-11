@@ -20,14 +20,13 @@ export async function getData(
     for (const key of Object.keys(paramsProps)) {
       const value = (paramsProps as any)[key];
       if (value) {
-        params.append(key, value);
+        params.append(key, value.toString());
       }
     }
   }
-  const paramString = params.toString();
-  const queryString = paramString ? `?${paramString}` : "";
+  const paramsQuery = params ? `?${params}` : "";
 
-  const res = await fetch(`${API_URL}${url}${queryString}`, {
+  const res = await fetch(`${API_URL}${url}${paramsQuery}`, {
     cache: cacheType ? cacheType : undefined,
     headers,
   });

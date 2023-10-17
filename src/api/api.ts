@@ -1,17 +1,23 @@
 import { API_URL } from "@/lib/utils";
 import { getSession, signOut } from "next-auth/react";
 
+export async function getToken() {
+  const session = await getSession();
+  if (session) return session.user.token;
+  return null;
+}
+
 export async function getData(
   url: string,
   paramsProps?: object,
   cacheType?: RequestCache
 ) {
-  const session = await getSession();
+  const token = await getToken();
   let headers: HeadersInit | undefined = undefined;
 
-  if (session) {
+  if (token) {
     headers = {
-      Authorization: `Bearer ${session.user.token}`,
+      Authorization: `Bearer ${token}`,
     };
   }
 
@@ -24,7 +30,7 @@ export async function getData(
       }
     }
   }
-  const paramsQuery = params ? `?${params}` : "";
+  const paramsQuery = params.size !== 0 ? `?${params}` : "";
 
   const res = await fetch(`${API_URL}${url}${paramsQuery}`, {
     cache: cacheType ? cacheType : undefined,
@@ -40,13 +46,13 @@ export async function getData(
 
 // POST
 export async function postData<T>(url: string, body: T) {
-  const session = await getSession();
+  const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
   };
 
-  if (session) {
-    headers["Authorization"] = `Bearer ${session.user.token}`;
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
@@ -64,13 +70,13 @@ export async function postData<T>(url: string, body: T) {
 
 // POST FORMDATA
 export async function postFormData(url: string, body: FormData) {
-  const session = await getSession();
+  const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "multipart/form-data",
   };
 
-  if (session) {
-    headers["Authorization"] = `Bearer ${session.user.token}`;
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
@@ -88,13 +94,13 @@ export async function postFormData(url: string, body: FormData) {
 
 // PUT
 export async function putData<T>(url: string, body: T) {
-  const session = await getSession();
+  const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
   };
 
-  if (session) {
-    headers["Authorization"] = `Bearer ${session.user.token}`;
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
@@ -112,13 +118,13 @@ export async function putData<T>(url: string, body: T) {
 
 // PATCH
 export async function patchData<T>(url: string, body: T) {
-  const session = await getSession();
+  const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
   };
 
-  if (session) {
-    headers["Authorization"] = `Bearer ${session.user.token}`;
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
@@ -136,12 +142,12 @@ export async function patchData<T>(url: string, body: T) {
 
 // DELETE
 export async function deleteData(url: string) {
-  const session = await getSession();
+  const token = await getToken();
   let headers: HeadersInit | undefined = undefined;
 
-  if (session) {
+  if (token) {
     headers = {
-      Authorization: `Bearer ${session.user.token}`,
+      Authorization: `Bearer ${token}`,
     };
   }
 

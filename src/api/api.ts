@@ -31,7 +31,6 @@ export async function getData(
     }
   }
   const paramsQuery = params.size !== 0 ? `?${params}` : "";
-
   const res = await fetch(`${API_URL}${url}${paramsQuery}`, {
     cache: cacheType ? cacheType : undefined,
     headers,

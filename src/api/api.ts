@@ -1,4 +1,4 @@
-import { API_URL } from "@/lib/utils";
+import { BASE_URL } from "@/lib/utils";
 import { getSession, signOut } from "next-auth/react";
 
 export async function getToken() {
@@ -8,8 +8,8 @@ export async function getToken() {
 }
 
 export async function getData(
-  url: string,
-  paramsProps?: object,
+  slug: string,
+  params?: object,
   cacheType?: RequestCache
 ) {
   const token = await getToken();
@@ -21,17 +21,18 @@ export async function getData(
     };
   }
 
-  const params = new URLSearchParams();
-  if (paramsProps) {
-    for (const key of Object.keys(paramsProps)) {
-      const value = (paramsProps as any)[key];
+  const completedUrl = new URL(`${BASE_URL}${slug}`);
+
+  if (params) {
+    for (const key of Object.keys(params)) {
+      const value = (params as any)[key];
       if (value) {
-        params.append(key, value.toString());
+        completedUrl.searchParams.set(key, value);
       }
     }
   }
-  const paramsQuery = params.size !== 0 ? `?${params}` : "";
-  const res = await fetch(`${API_URL}${url}${paramsQuery}`, {
+
+  const res = await fetch(completedUrl.toString(), {
     cache: cacheType ? cacheType : undefined,
     headers,
   });
@@ -44,7 +45,7 @@ export async function getData(
 }
 
 // POST
-export async function postData<T>(url: string, body: T) {
+export async function postData<T>(slug: string, body: T) {
   const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
@@ -54,7 +55,7 @@ export async function postData<T>(url: string, body: T) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_URL}${url}`, {
+  const res = await fetch(`${BASE_URL}${slug}`, {
     method: "POST",
     headers,
     body: JSON.stringify(body),
@@ -68,7 +69,7 @@ export async function postData<T>(url: string, body: T) {
 }
 
 // POST FORMDATA
-export async function postFormData(url: string, body: FormData) {
+export async function postFormData(slug: string, body: FormData) {
   const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "multipart/form-data",
@@ -78,7 +79,7 @@ export async function postFormData(url: string, body: FormData) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_URL}${url}`, {
+  const res = await fetch(`${BASE_URL}${slug}`, {
     method: "POST",
     headers,
     body: body,
@@ -92,7 +93,7 @@ export async function postFormData(url: string, body: FormData) {
 }
 
 // PUT
-export async function putData<T>(url: string, body: T) {
+export async function putData<T>(slug: string, body: T) {
   const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
@@ -102,7 +103,7 @@ export async function putData<T>(url: string, body: T) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_URL}${url}`, {
+  const res = await fetch(`${BASE_URL}${slug}`, {
     method: "PUT",
     headers,
     body: JSON.stringify(body),
@@ -116,7 +117,7 @@ export async function putData<T>(url: string, body: T) {
 }
 
 // PATCH
-export async function patchData<T>(url: string, body: T) {
+export async function patchData<T>(slug: string, body: T) {
   const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
@@ -126,7 +127,7 @@ export async function patchData<T>(url: string, body: T) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const res = await fetch(`${API_URL}${url}`, {
+  const res = await fetch(`${BASE_URL}${slug}`, {
     method: "PATCH",
     headers,
     body: JSON.stringify(body),
@@ -140,7 +141,7 @@ export async function patchData<T>(url: string, body: T) {
 }
 
 // DELETE
-export async function deleteData(url: string) {
+export async function deleteData(slug: string) {
   const token = await getToken();
   let headers: HeadersInit | undefined = undefined;
 
@@ -150,7 +151,7 @@ export async function deleteData(url: string) {
     };
   }
 
-  const res = await fetch(`${API_URL}${url}`, {
+  const res = await fetch(`${BASE_URL}${slug}`, {
     method: "DELETE",
     headers,
   });

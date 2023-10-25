@@ -5,4 +5,4 @@ export const LoadToTop = () => {
   });
 };
 
-export const API_URL = process.env.NEXT_PUBLIC_API;
+export const BASE_URL = process.env.NEXT_PUBLIC_API;

@@ -1,17 +1,17 @@
 import { BASE_URL } from "@/lib/utils";
 import { getSession, signOut } from "next-auth/react";
 
-export async function getToken() {
+export const getToken = async () => {
   const session = await getSession();
   if (session) return session.user.token;
   return null;
-}
+};
 
-export async function getData(
+export const getData = async (
   slug: string,
   params?: object,
   cacheType?: RequestCache
-) {
+) => {
   const token = await getToken();
   let headers: HeadersInit | undefined = undefined;
 
@@ -42,10 +42,10 @@ export async function getData(
   }
 
   return res.json();
-}
+};
 
 // POST
-export async function postData<T>(slug: string, body: T) {
+export const postData = async <T>(slug: string, body: T) => {
   const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
@@ -66,10 +66,10 @@ export async function postData<T>(slug: string, body: T) {
   }
 
   return res.json();
-}
+};
 
 // POST FORMDATA
-export async function postFormData(slug: string, body: FormData) {
+export const postFormData = async (slug: string, body: FormData) => {
   const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "multipart/form-data",
@@ -90,10 +90,10 @@ export async function postFormData(slug: string, body: FormData) {
   }
 
   return res.json();
-}
+};
 
 // PUT
-export async function putData<T>(slug: string, body: T) {
+export const putData = async <T>(slug: string, body: T) => {
   const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
@@ -114,10 +114,10 @@ export async function putData<T>(slug: string, body: T) {
   }
 
   return res.json();
-}
+};
 
 // PATCH
-export async function patchData<T>(slug: string, body: T) {
+export const patchData = async <T>(slug: string, body: T) => {
   const token = await getToken();
   const headers: HeadersInit | undefined = {
     "Content-Type": "application/json",
@@ -138,10 +138,10 @@ export async function patchData<T>(slug: string, body: T) {
   }
 
   return res.json();
-}
+};
 
 // DELETE
-export async function deleteData(slug: string) {
+export const deleteData = async (slug: string) => {
   const token = await getToken();
   let headers: HeadersInit | undefined = undefined;
 
@@ -161,4 +161,4 @@ export async function deleteData(slug: string) {
   }
 
   return res.json();
-}
+};

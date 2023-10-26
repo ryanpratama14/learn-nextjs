@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/lib/utils";
+import { BASE_URL, generateSearchParams } from "@/lib/utils";
 import { getSession, signOut } from "next-auth/react";
 
 export const getToken = async () => {
@@ -21,18 +21,7 @@ export const getData = async (
     };
   }
 
-  const completedUrl = new URL(`${BASE_URL}${slug}`);
-
-  if (params) {
-    for (const key of Object.keys(params)) {
-      const value = (params as any)[key];
-      if (value) {
-        completedUrl.searchParams.set(key, value);
-      }
-    }
-  }
-
-  const res = await fetch(completedUrl.toString(), {
+  const res = await fetch(generateSearchParams(`${BASE_URL}${slug}`, params), {
     cache: cacheType ? cacheType : undefined,
     headers,
   });
@@ -86,7 +75,7 @@ export const postFormData = async (slug: string, body: FormData) => {
   });
 
   if (res.status === 401) {
-    return console.log("UNAUTHORIZED");
+    return signOut();
   }
 
   return res.json();

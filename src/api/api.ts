@@ -1,7 +1,22 @@
-import { BASE_URL, generateSearchParams } from "@/lib/utils";
+import { BASE_URL } from "@/lib/utils";
 import { getSession, signOut } from "next-auth/react";
 
-export const getToken = async () => {
+const generateSearchParams = (url: string, params?: object) => {
+  const completedUrl = new URL(url);
+
+  if (params) {
+    for (const key of Object.keys(params)) {
+      const value = (params as any)[key];
+      if (value) {
+        completedUrl.searchParams.set(key, value);
+      }
+    }
+  }
+
+  return completedUrl.toString();
+};
+
+const getToken = async () => {
   const session = await getSession();
   if (session) return session.user.token;
   return null;

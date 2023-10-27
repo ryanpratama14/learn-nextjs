@@ -11,7 +11,12 @@ const initialData = {
   password: "0lelplR",
 };
 
-export default function Login() {
+type Props = {
+  callbackUrl?: string;
+  error?: string;
+};
+
+export default function Login({ error, callbackUrl }: Props) {
   const router = useRouter();
   const [data, setData] = useState(initialData);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +28,7 @@ export default function Login() {
     });
 
     if (!res?.error) {
-      router.push("/users");
+      router.push(callbackUrl ?? "/users");
     } else {
       toast.error("Username or password incorrect");
     }

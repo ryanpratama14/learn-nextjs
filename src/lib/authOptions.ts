@@ -26,7 +26,6 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log("<<<", token);
       return { ...token, ...user };
     },
     async session({ session, token }) {
@@ -35,7 +34,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/login",
+    signIn: "/",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

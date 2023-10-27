@@ -23,6 +23,7 @@ type User = {
 };
 
 type Post = {
+  [key: string]: number | string;
   userId: number;
   id: number;
   title: string;

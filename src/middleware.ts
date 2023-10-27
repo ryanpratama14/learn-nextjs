@@ -1,7 +1,15 @@
-// Without a defined matcher, this one line applies next-auth
-// to the entire project
-export { default } from "next-auth/middleware";
+import { withAuth } from "next-auth/middleware";
 
-// Applies next-auth only to matching routes - can be regex
-// Ref: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
+export default withAuth(
+  // `withAuth` augments your `Request` with the user's token.
+  function middleware(req) {
+    console.log(req.nextauth.token);
+  },
+  {
+    callbacks: {
+      authorized: ({ token }) => token?.email === "kminchelle@qq.com",
+    },
+  }
+);
+
 export const config = { matcher: ["/dashboard"] };

@@ -27,7 +27,6 @@ type Post = {
   id: number;
   title: string;
   body: string;
-  [key?: string]: string;
 };
 
 type PostItems = {

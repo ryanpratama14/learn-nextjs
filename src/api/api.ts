@@ -2,18 +2,18 @@ import { BASE_URL } from "@/lib/utils";
 import { getSession, signOut } from "next-auth/react";
 
 const generateSearchParams = (url: string, params?: object) => {
-  const completedUrl = new URL(url);
+  const newUrl = new URL(url);
 
   if (params) {
     for (const key of Object.keys(params)) {
       const value = (params as any)[key];
       if (value) {
-        completedUrl.searchParams.set(key, value);
+        newUrl.searchParams.set(key, value);
       }
     }
   }
 
-  return completedUrl.toString();
+  return newUrl.toString();
 };
 
 const getToken = async () => {
@@ -59,7 +59,7 @@ export const postData = async <T>(slug: string, body: T) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  console.log(headers)
+  console.log(headers);
 
   const res = await fetch(`${BASE_URL}${slug}`, {
     method: "POST",

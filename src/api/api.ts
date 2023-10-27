@@ -59,6 +59,8 @@ export const postData = async <T>(slug: string, body: T) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
+  console.log(headers)
+
   const res = await fetch(`${BASE_URL}${slug}`, {
     method: "POST",
     headers,

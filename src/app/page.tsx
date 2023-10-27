@@ -1,5 +1,6 @@
 import Login from "@/components/Login";
 import Link from "next/link";
+import AddPost2 from "./users/components/AddPost2";
 
 export default function Home(): React.JSX.Element {
   return (
@@ -12,6 +13,7 @@ export default function Home(): React.JSX.Element {
         See Todos
       </Link>
       <Login />
+      <AddPost2 />
     </main>
   );
 }
